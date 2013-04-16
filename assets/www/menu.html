@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>QSR</title>
+        <!-- Style sheets -->
+        <link rel="stylesheet"  href="css/lib/jquery.mobile-1.3.0.css">
+        <link rel="stylesheet" href="css/lib/mobiscroll.custom-2.5.0.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <!-- JS files -->
+        <script src="js/cordova-2.0.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/childbrowser.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/facebook.js"></script>
+        <script src="js/jquery.js"></script>
+
+        <script src="js/jquery.mobile-1.3.0.js"></script>
+        <script src="js/mobiscroll.custom-2.5.0.min.js"></script>
+        <script src="js/main.js"></script>
+
+        <script type="text/javascript">
+            function onBodyLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+        </script>
+    </head>
+
+<body>
+
+<!-- Body -->
+<div data-role="page" style="background: #000000 
+    url('images/qsr-bg.png');background-size:100% 100%; " id="page_menus">
+	
+	<div style="background: #000000 url('images/title-bg.png');">
+    	<div style="padding-top:10px;padding-bottom:5px;">
+    		
+    		<img src="images/back-btn.png" style="padding-left:10px;" alt="back button" onClick="javascript:Back()" />
+    		
+      		<img src="images/qsr-title.png" style="position:absolute;left:45%;" alt="main logo" />
+      		
+      	</div>
+	</div>
+
+	<!-- Page Content -->
+	<div data-role="content" style="padding:10px;">
+	
+	<style>
+	.menu label{
+	color:#yellow;
+	font-size:16px;
+	display:block;
+	margin-bottom:5px;
+	}
+	.menu img{
+	display:block;
+	margin-bottom:20px;
+	}
+	.menu .firstOption{
+	margin-top:25px;
+	}
+	.ok-remind .btnOk{
+	margin-top:20px;
+	}
+	</style>
+	
+	<!-- Wlecome image And next button -->
+	 <div align="center" style="margin-top:20px;color:yellow;" class="menu">
+      <label>Save your favorite menu to</label>
+      <label>save time every time you</label>
+      <label style="margin-bottom: 25px">order through QSR!</label>
+      
+      <!--<img  class="firstOption" src="images/option1-btn.png"  onClick="javascript:showMenu()"/>-->
+      <!--<img   src="images/option2-btn.png"  onClick="javascript:showMenu()"/>-->
+      <!--<img   src="images/option3-btn.png"  onClick="javascript:showMenu()"/>-->
+	    <div class="menu_name" align="center" id="option1" onclick="selectedOption('#option1 label')">
+	      <Label></Label>
+	    </div>
+
+      <div class="menu_name" align="center" id="option2" onclick="selectedOption('#option2 label')">
+        <Label></Label>
+      </div>
+      
+	</div>
+	<script>
+        document.addEventListener("backbutton", Back, true);
+        function Back(){
+            $.mobile.changePage('login.html', {
+                transition: "slide" ,
+                reverse: true
+            });
+        }
+
+        function  selectedOption(id) {
+            localStorage.setItem('selectedOption', $(id).html());
+            $.mobile.changePage('items_list.html', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+                           //alert($(id).html());
+        }
+ $("#page_menus").bind('pageshow', function (event, ui) {
+   $.mobile.showPageLoadingMsg();
+  var Url = _base_url+"/menus/save_favourite.json";
+  console.log("User request url "+Url);
+  
+			$.ajax({
+        		type: "GET",
+        		url: Url,
+        		dataType: "jsonp",
+        	success: function (response) {
+        	$.mobile.hidePageLoadingMsg();
+        			console.log("success");
+
+            		//alert(JSON.stringify(response));
+                  for(var i=0;i<response.length;i++){
+                      var id="#option"+(i+1);
+                      var label = id+" label"
+                     $(id).css( "visibility", "visible" );
+                      $(label).text( response[i]);
+
+                  }
+
+            		$.mobile.changePage('menu.html', {
+                         transition: "slide" 
+                     });
+        		},
+        		error: function () {
+        		$.mobile.hidePageLoadingMsg();
+        		    alert("faled");
+        			console.debug(xhr); console.debug(errorThrown);
+        			console.log("failure");
+            		console.log("Error occured is " + errorThrown);
+        		}
+    		});
+                                            
+                                              }); //pageshow
+</script>
+	
+	 <div align="center" class="ok-remind"> <img class="btnOk"  src="images/ok-btn.png"  onClick="javascript:showMenu()" /> <img   src="images/remind-btn.png"  onClick="javascript:showMenu()" style="margin-right:20px;"/></div>
+	
+	</div>
+</div>
+
+
+
+
+	
+</body>
+</html>
