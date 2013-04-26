@@ -26,16 +26,28 @@ function onFBConnected()
 
 //checking fb email id is already exists or not
 function checkfacebookid1(evt) {
-   // $.mobile.showPageLoadingMsg();
-    
+    $.mobile.showPageLoadingMsg();
     var response = JSON.parse(evt.target.responseText);
-    $.mobile.changePage('menu.html', {
-        transition: "none",
-        reverse: false,
-        changeHash: false
+    var User = {"user": {"email":response.email,"first_name":response.first_name,"last_name":response.last_name,"user_name":response.first_name, "login_type":"facebook"}}
+    var Url = _base_url+"/users.json";
+    $.ajax({
+        type: "POST",
+        url: Url,
+        data:User,
+        dataType: "json",
+        success: function (data) {
+            $.mobile.hidePageLoadingMsg();
+            sessionStorage.setItem('user_id', data._id);
+            $.mobile.changePage('menu.html', {
+               transition: "slide" 
+            });   
+        },
+        error: function (xhr, status, errorThrown) {
+            $.mobile.hidePageLoadingMsg();
+            alert("user not saved")
+        }
     });
     //alert(evt.target.responseText);
-
 }
 
 //facebook logout functionality implements here(index.html)

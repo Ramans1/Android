@@ -28,25 +28,25 @@
     
     <body onload="onBodyLoad()">
         <!-- Body -->
-        <div data-role="page" class="jqm-demos jqm-demos-home" style="background: #000000 
-    url('images/qsr-bg.png');background-size:100% 100%; " id="page_index">
+        <div data-role="page" class="jqm-demos jqm-demos-home" id="page_index" style="background: #e6ddc2 
+        url('images/qsr-bg.png');background-size:100% 100%; ">
             <!-- Food title image -->
-            <div align="center" style="background: #000000 url('images/title-bg-2.png');padding-bottom:5px;">
-                <img src="images/qsr-title-2.png" style="padding-top:10px;" alt="main logo" />
+            <div align="center" style="background: url('images/main-img.png');background-repeat:no-repeat;background-position:center;padding-bottom:200px;padding-top:10px;background-size:305px;">
+                
             </div>
             <!-- Page Content -->
             <div data-role="content" class="jqm-content" id="homeLanding">
                 <!-- Facebook Login -->
+                <div align="center" style="background: url('images/login-bg.png');background-repeat:no-repeat;background-position:center;margin-top:-25px;padding:15px;padding-top:25px;">
                 <div align="center">
                     <img src="images/facebook-btn.png" vspace="4" onClick="javascript:facebookLogin();" />
-                </div>
+                </div></br>
                 <!-- New user -->
                 <div align="center">
-                    <img src="images/create-login-btn.png" vspace="4" onClick="javascript:createNewUser();" />
+                    <img src="images/qsr-login.png" vspace="4" onClick="javascript:createNewUser();" />&nbsp;
+                    <img src="images/mindsys-login-btn.png" vspace="4" onClick="javascript:createNewUser();" />
                 </div>
-                <!-- Admin Login -->
-                <div align="center">
-                    <img src="images/mindsys-login-btn.png" vspace="4" />
+                
                 </div>
             </div>
             <script>

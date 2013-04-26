@@ -1,0 +1,86 @@
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>QSR</title>
+        <!-- Style sheets -->
+        <link rel="stylesheet" href="css/lib/jquery.css">
+        <link rel="stylesheet" href="css/lib/mobiscroll.custom-2.5.0.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <!-- JS files -->
+        <script src="js/cordova-2.0.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/childbrowser.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/facebook.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquerymobile.js"></script>
+        <script src="js/mobiscroll.custom-2.5.0.min.js"></script>
+        <script src="js/main.js"></script>
+        <script type="text/javascript">
+            function onBodyLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+        </script>
+    </head>
+
+	<body>
+	
+		<div data-role="page" style="background: #e6ddc2
+    		url('images/qsr-bg.png');background-size:100% 100%; " id="favorite_options">
+
+    		<div style="background: #000000 url('images/title-bg.png');">
+       			 <div style="padding-top:10px;padding-bottom:10px;">
+            		<img src="images/back-btn.png" style="padding-left:10px;" alt="back button" onClick="javascript:Back()" />
+            		<img src="images/qsr-title.png" style="position:absolute;left:45%;" alt="main logo" />
+
+        		</div>
+    		</div>
+
+    		<!-- Page Content -->
+    		
+    		<div data-role="content" style="padding:10px;" id="favourite_items">
+                <div id = "favourite_list" style="padding-top:25px;">
+                </div>
+
+        		<script>
+        			
+        			function Back(){
+        				$.mobile.changePage('orderType.html', {
+                			transition: "slide" ,
+                			reverse: true
+            			});
+        			}
+
+                    $("#favorite_options").bind('pageshow', function (event, ui) {
+                        $('#favourite_list').empty();
+                        var Url = _base_url+"/orders/order_favourate.json?user_id="+sessionStorage.getItem("user_id");
+                        $.ajax({
+                            type: "GET",
+                            url: Url,
+                            dataType: "jsonp",
+                            success: function (response) {
+                                $.mobile.hidePageLoadingMsg();
+                                console.log("success");
+                                //alert(JSON.stringify(response));
+                                for(var i=0;i<response.length;i++){
+                                    var id="#option"+(i+1);
+                                    var label = id+" label"
+                                    $(id).css( "visibility", "visible" );
+                                    $(label).text( response[i]);
+                                    $('#favourite_list').append('<div align="center" class="menu_name favourite-option">'+response[i]+'</div><br/>');
+                                }
+                            },
+                            error: function () {
+                                $.mobile.hidePageLoadingMsg();
+                                alert("failed");
+                                console.log("failure");
+                                console.log("Error occured is " + errorThrown);
+                            }
+                        });
+                    });
+
+        		</script>
+        	</div>
+        </div>
+        
+	</body>
+</html>

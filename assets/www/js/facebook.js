@@ -34,8 +34,7 @@ FBConnect.prototype.termsandconditions = function()
    
 }
 
-/**********************************************************************************************************
- * @author Bhaskar Reddy
+/***********************************************************************************************************
  * @Desc   Below functionality to open PDF document in child browser.
  *         Here PDF documents placed in server. The Base URL of server is declared in "scripts_android.js".
  *         

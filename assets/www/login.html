@@ -25,16 +25,14 @@
     </head>
 <body>
 <!-- Body -->
-<div data-role="page" class="jqm-demos jqm-demos-home" style="background: #000000 
+<div data-role="page" class="jqm-demos jqm-demos-home" style="background: #e6ddc2 
     url('images/qsr-bg.png');background-size:100% 100%; ">
 	
 <!-- Food title image -->
     <div style="background: #000000 url('images/title-bg.png');">
-    	<div style="padding-top:10px;padding-bottom:5px;">
+    	<div align="center", style="padding:5px;">
     		
-    		<img src="images/back-btn.png" style="padding-left:10px;" alt="back button" onClick="javascript:Back()" />
-    		
-      		<img src="images/qsr-title.png" style="position:absolute;left:45%;" alt="main logo" />
+      		<img src="images/qsr-title.png" alt="main logo" />
       		
       	</div>
 	</div>
@@ -42,7 +40,7 @@
 	<!-- Page Content -->
 	<div data-role="content" class="jqm-content" style="padding:10px;">
 		
-		<div class="register" style="margin-top:60px">
+		<div class="register" style="margin-top:60px;color:green;">
 		<div style="height:50px;">
 			<span class="lspan"><label>User Name</label><label class="colon">:</label></span>
 			<span class="rspan"><input type="text"  id="txt_userName" category="text" alert="Please Enter User Name"></span>
@@ -66,37 +64,31 @@
 <script>
 
 document.removeEventListener("backbutton", Back, false);
-function Back(){
 
-	}
 function validateForm(){
-var isValidForm = true;
+    var isValidForm = true;
 
-$('.register input').each(function(){
-			if(!isValidForm)
-			 return false;
+    $('.register input').each(function(){
+		if(!isValidForm)
+			return false;
+	    if(this.value.trim().length == 0){
+	        isValidForm = false;
+	        alert(this.getAttribute("alert"));
+	        this.focus();
+	    }
+    });
 
-	       if(this.value.trim().length == 0){
-	       isValidForm = false;
-	       alert(this.getAttribute("alert"));
-	       this.focus();
-	       }
-   
-});
+    if(isValidForm)
+    {
+        var userLogin = {
+        "user_name":$('#txt_userName').val(),
+        "password":$('#txt_pwd').val(),
+        "login_type":"user"}
+        console.log("User request json "+JSON.stringify(userLogin));
 
-if(isValidForm)
-{
-
-var userLogin = {
-"user_name":$('#txt_userName').val(),
-"password":$('#txt_pwd').val(),
-"login_type":"user"}
-
-console.log("User request json "+JSON.stringify(userLogin));
-
-$.mobile.showPageLoadingMsg();
-  var Url = _base_url+"/sessions.json";
-  	console.log("User request url "+Url);
+        $.mobile.showPageLoadingMsg();
+        var Url = _base_url+"/sessions.json";
+  	    console.log("User request url "+Url);
  
 			$.ajax({
         		type: "POST",
@@ -105,10 +97,12 @@ $.mobile.showPageLoadingMsg();
       			dataType: "json",
         		success: function (data) {
         			$.mobile.hidePageLoadingMsg();
+                    //alert(JSON.stringify(data));
             		localStorage.setItem('menus', JSON.stringify(data));
+                    sessionStorage.setItem('user_id', data._id);
             		$.mobile.changePage('menu.html', {
-                         transition: "slide" 
-                    });
+                    	transition: "slide"
+                	});
         		},
         		error: function (data, textStatus, XMLHttpRequest) {
         			$.mobile.hidePageLoadingMsg();
@@ -116,8 +110,7 @@ $.mobile.showPageLoadingMsg();
         		}
     		});
 
- 	
-}
+    }
 }
 String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
 </script>

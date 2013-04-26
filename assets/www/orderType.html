@@ -1,0 +1,67 @@
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>QSR</title>
+        <!-- Style sheets -->
+        <link rel="stylesheet" href="css/lib/jquery.css">
+        <link rel="stylesheet" href="css/lib/mobiscroll.custom-2.5.0.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <!-- JS files -->
+        <script src="js/cordova-2.0.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/childbrowser.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/facebook.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquerymobile.js"></script>
+        <script src="js/mobiscroll.custom-2.5.0.min.js"></script>
+        <script src="js/main.js"></script>
+        <script type="text/javascript">
+            function onBodyLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+        </script>
+    </head>
+
+	<body>
+	
+		<div data-role="page" style="background: #e6ddc2
+    		url('images/qsr-bg.png');background-size:100% 100%; " id="page_save_items">
+
+    		<div style="background: #000000 url('images/title-bg.png');">
+       			 <div style="padding-top:10px;padding-bottom:5px;">
+            		<img src="images/back-btn.png" style="padding-left:10px;" alt="back button" onClick="javascript:Back()" />
+            		<img src="images/qsr-title.png" style="position:absolute;left:45%;" alt="main logo" />
+        		</div>
+    		</div>
+
+    		<!-- Page Content -->
+    		
+    		<div data-role="content" style="padding:10px;">
+        		<div align="center" style="padding-top:20px;"> 
+        			<img class="btnOk"  src="images/order-your-favorite.png"  onClick="javascript:favoriteOption()" /> 
+        		</div>
+        		<div align="center" style="padding-top:40px;">
+        			<img class="btnOk"  src="images/place-new-order-btn.png"  onClick="javascript:ReadyToPlace()" />
+        		</div>
+        		
+        		<script>
+
+                    function favoriteOption(){
+                        $.mobile.changePage('favoriteOption.html', {
+                            transition: "slide",
+                            reverse: true
+                        });
+                    }
+        			
+        			function Back(){
+        				$.mobile.changePage('readyToPlaceOrder.html', {
+                			transition: "slide" ,
+                			reverse: true
+            			});
+        			}
+        		</script>
+        	</div>
+        </div>
+        
+	</body>
+</html>

@@ -2,9 +2,8 @@
 
 
  label{
-color:#ffffff;
+color:green;
 text-shadow:none;
-color:#FFFF00
 }
 
 .colon {
@@ -12,6 +11,16 @@ color:#FFFF00
 	padding-right: 5px;
 	font-size:16px;
 	font-weight:bold;
+}
+button{
+	color:#FFFFFF;
+}
+.button-qsr {
+	color:#FFFFFF;
+	background:gray;
+	width:120px;
+	height:40px;
+	border-radius: 7px 7px 7px 7px;
 }
 
 .register .lspan{
@@ -32,7 +41,7 @@ margin-top:10px !important;
 }
 
 .menu label{
-	color:#yellow;
+	color:green;
 	font-size:16px;
 	display:block;
 	margin-bottom:5px;
@@ -49,12 +58,20 @@ margin-top:10px !important;
 	}
 
  .menu_name{
-     visibility:hidden;background: url('../images/option-btn-bg.png');
+     background: url('../images/option-btn-bg.png');
      background-repeat:no-repeat;
      background-position:center;
+     padding:10px;
+ }
+ .favourite-option {
+ 	color:white !important;
+ 	font-weight: bold;
+ 	font-size:14px;
+ 	padding-top:15px;
+ 	text-shadow:none;
  }
  .menu_name label{
-     height: 100%;padding:10px;color:black !important;font-weight: bold;
+     height: 100%;padding:5px;color:white !important;font-weight: bold;
  }
 
 
